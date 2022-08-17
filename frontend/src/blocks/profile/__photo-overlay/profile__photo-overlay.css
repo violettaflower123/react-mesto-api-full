@@ -1,0 +1,25 @@
+.profile__photo-overlay {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  transition: 0.1s;
+}
+
+.profile__photo-overlay:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 29px;
+  height: 27px;
+  transform: translate(-50%, -50%);
+  background-image: url(../../../images/change__icon.png);
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.profile__photo-overlay:hover.profile__photo-overlay:before {
+  opacity: 0.8;
+}

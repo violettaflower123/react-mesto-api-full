@@ -1,0 +1,16 @@
+.popup__form_type_avatar {
+    min-height: 272px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .popup__form_type_avatar {
+      max-width: 282px;
+      min-height: 322px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .popup__form_type_avatar {
+      min-height: 280px;
+    }
+  }

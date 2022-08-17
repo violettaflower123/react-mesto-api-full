@@ -1,0 +1,25 @@
+.profile__box_overlay {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  transition: 0.1s;
+}
+
+.profile__box_overlay:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  background-image: url(../../../../images/change__icon.png);
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.profile__box_overlay:hover.profile__photo_overlay:before {
+  opacity: 0.8;
+}

@@ -1,0 +1,13 @@
+.popup__input-container_type_sign {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    padding-bottom: 216px;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__input-container_type_sign {
+        padding-bottom: 173px;
+    }
+}

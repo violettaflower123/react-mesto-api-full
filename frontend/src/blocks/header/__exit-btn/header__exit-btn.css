@@ -1,0 +1,12 @@
+.header__exit-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter-400', sans-serif, Arial;
+    font-size: 18px;
+    line-height: 22px;
+    color: #A9A9A9;
+    padding-left: 24px;
+    padding-right: 0px;
+}
+

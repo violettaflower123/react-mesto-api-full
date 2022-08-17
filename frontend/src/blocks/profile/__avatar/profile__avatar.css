@@ -1,0 +1,23 @@
+.profile__avatar {
+  display: none;
+  background-image: url(../../../images/change__icon.png);
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 47px;
+  left: 47px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.25s, opacity 0.25s linear;
+  z-index: 10;
+}
+
+.profile__avatar:hover {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}

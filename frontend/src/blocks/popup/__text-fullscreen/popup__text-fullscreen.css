@@ -1,0 +1,9 @@
+.popup__text-fullscreen {
+  margin: 0;
+  padding-left: 0;
+  font-family: 'Inter-400', Arial, sans-serif;
+  color: white;
+  font-size: 12px;
+  line-height: 14.52px;
+  padding-top: 6px;
+}

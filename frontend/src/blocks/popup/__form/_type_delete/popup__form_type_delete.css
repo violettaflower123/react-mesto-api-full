@@ -1,0 +1,10 @@
+.popup__form_type_delete {
+  min-height: 181px;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__form_type_delete {
+    max-width: 282px;
+    max-height: 322px;
+  }
+}

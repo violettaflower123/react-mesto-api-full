@@ -1,0 +1,12 @@
+.popup__input_type_sign {
+    border: 0;
+    background-color: black;
+    border-bottom: 1px solid #CCCCCC;
+    color: #CCCCCC;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__input_type_sign {
+        width: 260px;
+    }
+}
