@@ -1,4 +1,10 @@
-import { useState, useEffect, useCallback, useContext, useSyncExternalStore } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useSyncExternalStore,
+} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
@@ -32,28 +38,28 @@ function App() {
   const [isInfotoolOpen, setOpenInfotool] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
 
-    //проверка асторизован ли пользователь при загрузке страницы
-    const tockenCheck = useCallback(
-      () => {
-        let jwt = localStorage.getItem("token");
-        if (jwt) {
-          setToken(jwt);
-          auth.checkToken(jwt).then((data) => {
-            if (data.email) {
-              setUserData({
-                userData: data.data._id,
-                email: data.data.email,
-              });
-              setLoggedIn(true);
-              navigate("/");
-            }
-          }).catch((err) => console.log(err));
-        }
-      },
-      [navigate]
-    );
+  //проверка асторизован ли пользователь при загрузке страницы
+  const tockenCheck = useCallback(() => {
+    let jwt = localStorage.getItem("token");
+    if (jwt) {
+      setToken(jwt);
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          if (data.email) {
+            setUserData({
+              userData: data.data._id,
+              email: data.data.email,
+            });
+            setLoggedIn(true);
+            navigate("/");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [navigate]);
   //проверка токена при каждой загрузке страницы
   // useEffect(() => {
   //   tockenCheck();
@@ -76,7 +82,7 @@ function App() {
 
   useEffect(() => {
     if (loggedIn === true) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       api
         .getDataInitialCards(token)
         .then((cards) => {
@@ -88,10 +94,10 @@ function App() {
 
   //получить данные о пользователе с сервера
   // useEffect(() => {
-  //   if(loggedIn === true) {   
+  //   if(loggedIn === true) {
   //    api
   //        .getDataUser()
-   
+
   //        .then((profile) => {
   //          setCurrentUser(profile);
   //        })
@@ -99,18 +105,17 @@ function App() {
   //      }
   //    }, [loggedIn]);
   useEffect(() => {
-    if(loggedIn === true) {
-      const token = localStorage.getItem('token');   
+    if (loggedIn === true) {
+      const token = localStorage.getItem("token");
       api
-         .getDataUser(token)
-   
-         .then((profile) => {
-           setCurrentUser(profile);
-         })
-         .catch((err) => alert(err));
-       }
-     }, [loggedIn]);
+        .getDataUser(token)
 
+        .then((profile) => {
+          setCurrentUser(profile);
+        })
+        .catch((err) => alert(err));
+    }
+  }, [loggedIn]);
 
   //открытие попапов
   function handleEditAvatarClick() {
@@ -153,9 +158,19 @@ function App() {
   }
 
   //обновление данных о пользователе
+  // function handleUpdateUser(data) {
+  //   api
+  //     .changeUser(data)
+  //     .then((profile) => {
+  //       setCurrentUser(profile);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => alert(err));
+  // }
   function handleUpdateUser(data) {
+    const token = localStorage.getItem("token");
     api
-      .changeUser(data)
+      .changeUser(data, token)
       .then((profile) => {
         setCurrentUser(profile);
         closeAllPopups();
@@ -164,9 +179,19 @@ function App() {
   }
 
   //обновление аватарки
+  // function handleUpdateAvatar(data) {
+  //   api
+  //     .changeAvatar(data)
+  //     .then((profile) => {
+  //       setCurrentUser(profile);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => alert(err));
+  // }
   function handleUpdateAvatar(data) {
+    const token = localStorage.getItem("token");
     api
-      .changeAvatar(data)
+      .changeAvatar(data, token)
       .then((profile) => {
         setCurrentUser(profile);
         closeAllPopups();
@@ -174,10 +199,21 @@ function App() {
       .catch((err) => alert(err));
   }
 
+  // //добавление новой карточки
+  // function handleAddNewCard(data) {
+  //   api
+  //     .addCard(data)
+  //     .then((newCard) => {
+  //       setCards([newCard, ...cards]);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => alert(err));
+  // }
   //добавление новой карточки
   function handleAddNewCard(data) {
+    const token = localStorage.getItem("token");
     api
-      .addCard(data)
+      .addCard(data, token)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -205,6 +241,15 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
+    // api
+    //   .toggleLike(card._id, isLiked, token)
+    //   .then((newCard) => {
+    //     setCards((state) =>
+    //       state.map((c) => (c._id === card._id ? newCard : c))
+    //     );
+    //   })
+    //   .catch((err) => alert(err));
+    const token = localStorage.getItem("token");
     api
       .toggleLike(card._id, isLiked, token)
       .then((newCard) => {
@@ -221,12 +266,20 @@ function App() {
     const isOwn = card.owner._id === currentUser._id;
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
+    const token = localStorage.getItem('token'); 
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, auth.checkToken)
       .then(() => {
         setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
       })
       .catch((err) => alert(err));
+      // const token = localStorage.getItem('token'); 
+      // api
+      //   .deleteCard(card._id, auth.checkToken)
+      //   .then(() => {
+      //     setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
+      //   })
+      //   .catch((err) => alert(err));
   }
 
   // //проверка асторизован ли пользователь при загрузке страницы
@@ -298,7 +351,6 @@ function App() {
     navigate("/signin");
   };
 
-  
   return (
     <UserContext.Provider value={currentUser}>
       <div className="app">
