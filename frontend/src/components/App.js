@@ -34,51 +34,18 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
   const [token, setToken] = useState('');
 
-    //проверка асторизован ли пользователь при загрузке страницы
-    const tockenCheck = useCallback(
-      () => {
-        let jwt = localStorage.getItem("token");
-        if (jwt) {
-          setToken(jwt);
-          auth.checkToken(jwt).then((data) => {
-            if (data.email) {
-              setUserData({
-                userData: data.data._id,
-                email: data.data.email,
-              });
-              setLoggedIn(true);
-              navigate("/");
-            }
-          }).catch((err) => console.log(err));
-        }
-      },
-      [navigate]
-    );
-  //проверка токена при каждой загрузке страницы
-  // useEffect(() => {
-  //   tockenCheck();
-  // }, []);
+
+  // проверка токена при каждой загрузке страницы
   useEffect(() => {
     tockenCheck();
-  }, [tockenCheck]);
+  }, []);
+
 
   //получить карточки с сервера
-  // useEffect(() => {
-  //   if (loggedIn === true) {
-  //     api
-  //       .getDataInitialCards()
-  //       .then((cards) => {
-  //         setCards(cards);
-  //       })
-  //       .catch((err) => alert(err));
-  //   }
-  // }, [loggedIn]);
-
   useEffect(() => {
     if (loggedIn === true) {
-      const token = localStorage.getItem('token');
       api
-        .getDataInitialCards(token)
+        .getDataInitialCards()
         .then((cards) => {
           setCards(cards);
         })
@@ -86,23 +53,12 @@ function App() {
     }
   }, [loggedIn]);
 
-  //получить данные о пользователе с сервера
-  // useEffect(() => {
-  //   if(loggedIn === true) {   
-  //    api
-  //        .getDataUser()
-   
-  //        .then((profile) => {
-  //          setCurrentUser(profile);
-  //        })
-  //        .catch((err) => alert(err));
-  //      }
-  //    }, [loggedIn]);
+
+  // получить данные о пользователе с сервера
   useEffect(() => {
-    if(loggedIn === true) {
-      const token = localStorage.getItem('token');   
-      api
-         .getDataUser(token)
+    if(loggedIn === true) {   
+     api
+         .getDataUser()
    
          .then((profile) => {
            setCurrentUser(profile);
@@ -110,6 +66,7 @@ function App() {
          .catch((err) => alert(err));
        }
      }, [loggedIn]);
+
 
 
   //открытие попапов
@@ -185,21 +142,21 @@ function App() {
       .catch((err) => alert(err));
   }
 
-  //ставим лайки
-  // function handleCardLike(card) {
-  //   // Снова проверяем, есть ли уже лайк на этой карточке
-  //   const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  // ставим лайки
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-  //   // Отправляем запрос в API и получаем обновлённые данные карточки
-  //   api
-  //     .toggleLike(card._id, isLiked)
-  //     .then((newCard) => {
-  //       setCards((state) =>
-  //         state.map((c) => (c._id === card._id ? newCard : c))
-  //       );
-  //     })
-  //     .catch((err) => alert(err));
-  // }
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .toggleLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => alert(err));
+  }
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -230,21 +187,21 @@ function App() {
   }
 
   // //проверка асторизован ли пользователь при загрузке страницы
-  // const tockenCheck = () => {
-  //   let jwt = localStorage.getItem("token");
-  //   if (jwt) {
-  //     auth.checkToken(jwt).then((data) => {
-  //       if (data.data.email) {
-  //         setUserData({
-  //           userData: data.data._id,
-  //           email: data.data.email,
-  //         });
-  //         setLoggedIn(true);
-  //         navigate("/");
-  //       }
-  //     }).catch((err) => console.log(err));
-  //   }
-  // };
+  const tockenCheck = () => {
+    let jwt = localStorage.getItem("token");
+    if (jwt) {
+      auth.checkToken(jwt).then((data) => {
+        if (data.data.email) {
+          setUserData({
+            userData: data.data._id,
+            email: data.data.email,
+          });
+          setLoggedIn(true);
+          navigate("/");
+        }
+      }).catch((err) => console.log(err));
+    }
+  };
 
   //регистрация
   const handleRegister = (email, password) => {
