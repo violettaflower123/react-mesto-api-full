@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
-export const BASE_URL = "http://mesto.project.api.nomoredomains.sbs/";
+export const BASE_URL = "http://mesto.project.api.nomoredomains.sbs";
 
 const checkRes = (response) => {
   return response.ok
