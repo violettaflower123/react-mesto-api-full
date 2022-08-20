@@ -51,8 +51,8 @@ function App() {
           console.log("tockencheck", data);
           if (data.user.email) {
             setUserData({
-              userData: data.user._id,
-              email: data.user.email,
+              userData: data.data.user._id,
+              email: data.data.user.email,
             });
             setLoggedIn(true);
             navigate("/");
@@ -309,8 +309,8 @@ function App() {
         if (data.token) {
           localStorage.setItem("token", data.token);
           setUserData({
-            userName: data.user._id,
-            email: data.user.email,
+            userName: data.data.user._id,
+            email: data.data.user.email,
           });
         }
       })
@@ -331,8 +331,8 @@ function App() {
           setOpenInfotool(false);
           localStorage.setItem("token", data.token);
           setUserData({
-            userName: data.user._id,
-            email: data.user.email,
+            userName: data.data.user._id,
+            email: data.data.user.email,
           });
           setLoggedIn(true);
           navigate("/");
