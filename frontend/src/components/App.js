@@ -239,7 +239,7 @@ function App() {
   // }
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser.user._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     // api
@@ -264,7 +264,7 @@ function App() {
   //удаление карточки
   function handleCardDelete(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner._id === currentUser.user._id;
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     const token = localStorage.getItem('token'); 
