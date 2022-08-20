@@ -48,7 +48,6 @@ function App() {
       auth
         .checkToken(jwt)
         .then((data) => {
-          console.log("tockencheck", data);
           if (data.user.email) {
             setUserData({
               userData: data.user._id,

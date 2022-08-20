@@ -30,6 +30,8 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
     isLiked ? "element__like_active" : "element__like"
   }`;
 
+  console.log("карточка", card);
+
   //функция для увеличения картинки по клику
   function handleCardClick() {
     onCardClick(card);
