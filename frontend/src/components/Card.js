@@ -20,7 +20,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   let isLiked;
   if (typeof card.likes !== "undefined") {
-    isLiked = card.likes.some((i) => i.user._id === currentUser.user._id);
+    isLiked = card.likes.some((i) => i._id === currentUser.user._id);
   } else {
     isLiked = false;
   } 
