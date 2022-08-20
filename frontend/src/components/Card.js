@@ -7,7 +7,8 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(UserContext);
 
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = card.owner._id === currentUser._id;
+  // const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser.user._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = `element__trash ${

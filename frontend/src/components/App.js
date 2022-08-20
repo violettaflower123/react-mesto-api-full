@@ -263,7 +263,8 @@ function App() {
   //удаление карточки
   function handleCardDelete(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isOwn = card.owner._id === currentUser.user._id;
+    // const isOwn = card.owner._id === currentUser.user._id;
+    const isOwn = card.owner === currentUser.user._id;
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     const token = localStorage.getItem('token'); 
