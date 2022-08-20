@@ -304,8 +304,8 @@ function App() {
     auth
       .register(email, password)
       .then((data) => {
-        if (data.user.token) {
-          localStorage.setItem("token", data.user.token);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
           setUserData({
             userName: data.data.user._id,
             email: data.user.email,
@@ -324,9 +324,9 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        if (data.user.token) {
+        if (data.token) {
           setOpenInfotool(false);
-          localStorage.setItem("token", data.user.token);
+          localStorage.setItem("token", data.token);
           setUserData({
             userName: data.user._id,
             email: data.user.email,
