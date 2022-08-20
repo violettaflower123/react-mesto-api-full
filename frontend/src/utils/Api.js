@@ -49,23 +49,25 @@ class Api {
     }
   
     //добавить новую карточку
-    // addCard(data) {
-    //   return fetch(`${this._url}cards`, {
-    //     method: "POST",
-    //     headers: this._headers,
-    //     body: JSON.stringify(data),
-    //   }).then(this._errorHandler);
-    // }
     addCard(data, token) {
-        return fetch(`${this._url}cards`, {
-          method: "POST",
-          headers: {
-            ...this._headers,
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(data),
-        }).then(this._errorHandler);
-      }
+      return fetch(`${this._url}cards`, {
+        method: "POST",
+        headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+        body: JSON.stringify(data),
+      }).then(this._errorHandler);
+    }
+    // addCard(data, token) {
+    //     return fetch(`${this._url}cards`, {
+    //       method: "POST",
+    //       headers: {
+    //         ...this._headers,
+    //         Authorization: `Bearer ${token}`
+    //       },
+    //       body: JSON.stringify(data),
+    //     }).then(this._errorHandler);
+    //   }
     
 
     
