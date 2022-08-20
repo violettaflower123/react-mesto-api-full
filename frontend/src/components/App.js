@@ -53,6 +53,9 @@ function App() {
             setUserData({
               userData: data.user._id,
               email: data.user.email,
+              avatar: data.user.avatar,
+              name: data.user.name,
+              about: data.user.about,
             });
             setLoggedIn(true);
             navigate("/");
