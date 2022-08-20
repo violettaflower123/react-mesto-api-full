@@ -238,7 +238,13 @@ function App() {
   // }
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+    // const isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+    let isLiked;
+    if (typeof card.likes !== "undefined") {
+      isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+    } else {
+      isLiked = false;
+    }
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     // api
@@ -267,20 +273,20 @@ function App() {
     const isOwn = card.owner === currentUser.user._id;
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem("token");
     api
       .deleteCard(card._id, auth.checkToken)
       .then(() => {
         setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
       })
       .catch((err) => alert(err));
-      // const token = localStorage.getItem('token'); 
-      // api
-      //   .deleteCard(card._id, auth.checkToken)
-      //   .then(() => {
-      //     setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
-      //   })
-      //   .catch((err) => alert(err));
+    // const token = localStorage.getItem('token');
+    // api
+    //   .deleteCard(card._id, auth.checkToken)
+    //   .then(() => {
+    //     setCards((state) => state.filter((c) => (c._id === card._id ? "" : c)));
+    //   })
+    //   .catch((err) => alert(err));
   }
 
   // //проверка асторизован ли пользователь при загрузке страницы
