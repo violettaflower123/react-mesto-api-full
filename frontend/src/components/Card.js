@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-//import api from "../utils/Api";
 
 const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   
@@ -8,9 +7,10 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(UserContext);
   console.log("здесь", currentUser);
   console.log("нучтожетакое", currentUser.user);
+  console.log(card);
 
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner._id === currentUser.user._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = `element__trash ${
@@ -23,7 +23,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   let isLiked;
   if (typeof card.likes !== "undefined") {
-    isLiked = card.likes.some((i) => i._id === currentUser._id);
+    isLiked = card.likes.some((i) => i._id === currentUser.user._id);
   } else {
     isLiked = false;
   } 
