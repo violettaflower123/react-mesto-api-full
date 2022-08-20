@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import Card from "./Card";
 
 const Main = (props) => {
-  const profileContext = useContext(UserContext);
+  const profileContext = useContext(UserContext.user);
   console.log("profile", profileContext);
 
   return (
