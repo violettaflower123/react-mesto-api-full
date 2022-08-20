@@ -309,8 +309,8 @@ function App() {
         if (data.token) {
           localStorage.setItem("token", data.token);
           setUserData({
-            userName: data.data._id,
-            email: data.email,
+            userName: data.user._id,
+            email: data.user.email,
           });
         }
       })
@@ -331,8 +331,8 @@ function App() {
           setOpenInfotool(false);
           localStorage.setItem("token", data.token);
           setUserData({
-            userName: data._id,
-            email: data.email,
+            userName: data.user._id,
+            email: data.user.email,
           });
           setLoggedIn(true);
           navigate("/");
