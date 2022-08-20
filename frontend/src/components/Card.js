@@ -6,6 +6,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   
   // let count = card.likes.length;
   const currentUser = useContext(UserContext);
+  console.log("здесь", currentUser, currentUser.user);
 
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser._id;
