@@ -5,9 +5,6 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   
   // let count = card.likes.length;
   const currentUser = useContext(UserContext);
-  console.log("здесь", currentUser);
-  console.log("нучтожетакое", currentUser.user);
-  console.log(card);
 
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser.user._id;
@@ -23,11 +20,12 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   let isLiked;
   if (typeof card.likes !== "undefined") {
-    isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+    isLiked = card.likes.some((i) => i.user._id === currentUser.user._id);
   } else {
     isLiked = false;
   } 
   
+  console.log("карточка", card);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${
