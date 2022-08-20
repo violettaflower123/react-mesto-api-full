@@ -255,9 +255,9 @@ function App() {
     //     );
     //   })
     //   .catch((err) => alert(err));
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     api
-      .toggleLike(card._id, isLiked, token)
+      .toggleLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
