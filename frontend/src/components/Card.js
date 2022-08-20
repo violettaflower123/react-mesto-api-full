@@ -16,17 +16,15 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
 
-  // const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((i) => i._id === currentUser.user._id);
 
-  let isLiked;
-  if (typeof card.likes !== "undefined") {
-    isLiked = card.likes.some((i) => i._id === currentUser.user._id);
-  } else {
-    isLiked = false;
-  } 
+  // let isLiked;
+  // if (typeof card.likes !== "undefined") {
+  //   isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+  // } else {
+  //   isLiked = false;
+  // } 
   
-  console.log("карточка", card);
-
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${
     isLiked ? "element__like_active" : "element__like"
