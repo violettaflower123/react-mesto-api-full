@@ -97,7 +97,7 @@ class Api {
         return fetch(`${this._url}cards/${id}/likes`, {
           method: status ? "DELETE" : "PUT",
           headers: {
-            ...this._headers,
+            // ...this._headers,
             Authorization: `Bearer ${token}`
           },
         }).then(this._errorHandler);
