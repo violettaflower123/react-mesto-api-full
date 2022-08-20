@@ -51,8 +51,8 @@ function App() {
           console.log("tockencheck", data);
           if (data.user.email) {
             setUserData({
-              userData: data.data.user._id,
-              email: data.data.user.email,
+              userData: data.user._id,
+              email: data.user.email,
             });
             setLoggedIn(true);
             navigate("/");
