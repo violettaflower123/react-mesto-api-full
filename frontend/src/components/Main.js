@@ -12,7 +12,7 @@ const Main = (props) => {
           <div className="profile__photo-overlay js-new-avatar-form">
             <img
               className="profile__photo"
-              src={profileContext.avatar}
+              src={profileContext.user.avatar}
               alt="Жак-Ив Кусто"
               onClick={props.onEditAvatar}
             />
@@ -21,13 +21,13 @@ const Main = (props) => {
 
           <div className="profile__text">
             <div className="profile__info">
-              <h1 className="profile__title">{profileContext.name}</h1>
+              <h1 className="profile__title">{profileContext.user.name}</h1>
               <button
                 className="profile__edit-button"
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__subtitle">{profileContext.about}</p>
+            <p className="profile__subtitle">{profileContext.user.about}</p>
           </div>
         </div>
         <button
