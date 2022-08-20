@@ -48,10 +48,10 @@ function App() {
       auth
         .checkToken(jwt)
         .then((data) => {
-          if (data.email) {
+          if (data.user.email) {
             setUserData({
-              userData: data.data._id,
-              email: data.data.email,
+              userData: data.data.user._id,
+              email: data.data.user.email,
             });
             setLoggedIn(true);
             navigate("/");
@@ -304,11 +304,11 @@ function App() {
     auth
       .register(email, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
+        if (data.user.token) {
+          localStorage.setItem("token", data.user.token);
           setUserData({
-            userName: data.data._id,
-            email: data.email,
+            userName: data.data.user._id,
+            email: data.user.email,
           });
         }
       })
@@ -324,12 +324,12 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        if (data.token) {
+        if (data.user.token) {
           setOpenInfotool(false);
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.user.token);
           setUserData({
-            userName: data._id,
-            email: data.email,
+            userName: data.user._id,
+            email: data.user.email,
           });
           setLoggedIn(true);
           navigate("/");
@@ -406,7 +406,7 @@ function App() {
                       handleRegister={handleRegister}
                     >
                       <Link to={"/signin"} className="popup__btm-redirect-link">
-                        Уже зарегистрированы? Войти.
+                        Уже зарегистрированы? войти.
                       </Link>
                     </Register>
                   </div>
