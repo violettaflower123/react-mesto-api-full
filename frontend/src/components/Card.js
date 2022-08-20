@@ -6,10 +6,11 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   
   // let count = card.likes.length;
   const currentUser = useContext(UserContext);
-  console.log("здесь", currentUser, currentUser.user);
+  console.log("здесь", currentUser);
+  console.log("нучтожетакое", currentUser.user);
 
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = card.owner._id === currentUser.user._id;
+  const isOwn = card.owner._id === currentUser._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = `element__trash ${
@@ -22,7 +23,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
 
   let isLiked;
   if (typeof card.likes !== "undefined") {
-    isLiked = card.likes.some((i) => i._id === currentUser.user._id);
+    isLiked = card.likes.some((i) => i._id === currentUser._id);
   } else {
     isLiked = false;
   } 
